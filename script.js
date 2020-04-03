@@ -53,6 +53,7 @@ function startProgram() {
 }
 
 function hoverButton(elem) {
+	elem.style.cursor = 'pointer';
 	elem.style.backgroundColor = 'rgba(12, 136, 236, 0.6)';
 	elem.addEventListener('mouseover', function() {
 		elem.style.backgroundColor = 'rgba(12, 136, 236, 1)';
@@ -118,6 +119,7 @@ function newGame() {
 		finall.innerHTML = 'Ваш JavaScript!';
 	});
 	button.style.backgroundColor = '#ebebe4';
+	button.style.cursor = 'default';
 	console.clear();
 }
 

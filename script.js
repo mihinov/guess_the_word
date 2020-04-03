@@ -84,12 +84,14 @@ function arrElemsNotEmpty(arr, length) {
 function logic(letter) {
 	let find = false;
 	for (let i = 0; i < findWord.length; i++) {
-		if (letter == findWord[i] && !word[i]) {
-			word[i] = letter;
-			spans[i].innerHTML = word[i];
-			find = true;
-			break;
-		}	
+		for (let j = 0; j < findWord.length; j++) {
+			if (letter == findWord[i]) {
+				word[i] = letter;
+				spans[i].innerHTML = word[i];
+				find = true;
+				break;
+			}	
+		}
 	}
 	if (find == true) {
 		finall.innerHTML = 'Угадано!';

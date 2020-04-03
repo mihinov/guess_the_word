@@ -116,6 +116,7 @@ function newGame() {
 		block.remove();
 		finall.innerHTML = 'Ваш JavaScript!';
 	});
+	button.style.backgroundColor = '#ebebe4';
 	console.clear();
 }
 

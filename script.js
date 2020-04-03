@@ -53,6 +53,7 @@ function startProgram() {
 }
 
 function hoverButton(elem) {
+	elem.style.backgroundColor = 'rgba(12, 136, 236, 0.6)';
 	elem.addEventListener('mouseover', function() {
 		elem.style.backgroundColor = 'rgba(12, 136, 236, 1)';
 	});

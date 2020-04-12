@@ -37,9 +37,22 @@ const words = [
 let findWord, word, spans;
 
 startProgram();
+form.addEventListener('submit', submitForm);
+edit__block.addEventListener('input', editBlock);
+
+edit__block.addEventListener('keydown', function(e) {
+	console.log(this);
+	if ((e.key == 'я' || e.key == 'Я' || e.key == 'z' || e.key == 'Z') && e.ctrlKey) {
+		e.target.value = e.target.value.slice(0, -1);
+	}
+	if (e.key == 'Enter') {
+		submitForm(e);
+	}
+});
 
 function startProgram() {
-	findWord = words[getRandomInt(words.length)];
+	const numberInArray = getRandomInt(words.length);
+	findWord = words[numberInArray];
 	word = [];
 	console.log(findWord);
 	find__word.innerHTML = '';
@@ -59,7 +72,7 @@ function hoverButton(elem) {
 		elem.style.backgroundColor = 'rgba(12, 136, 236, 1)';
 	});
 	elem.addEventListener('mouseout', function() {
-		this.style.backgroundColor = 'rgba(12, 136, 236, 0.6)';
+		elem.style.backgroundColor = 'rgba(12, 136, 236, 0.6)';
 	});
 }
 
@@ -69,7 +82,7 @@ function getRandomInt(max) {
 
 function arrElemsNotEmpty(arr, length) {
 // если отгадали слово, т.е. массив не пустой 
-// и длина у массива равна длина загаданного слова
+// и длина у массива равна длине загаданного слова
 	if (arr.length != length) {
 		return false;
 	}
@@ -81,18 +94,16 @@ function arrElemsNotEmpty(arr, length) {
 	return true;
 }
 
-function logic(letter) {
+function logic(letter) { // letter = 'a'
 	let find = false;
 	for (let i = 0; i < findWord.length; i++) {
-		for (let j = 0; j < findWord.length; j++) {
-			if (letter == findWord[i]) {
-				word[i] = letter;
-				spans[i].innerHTML = word[i];
-				find = true;
-				break;
-			}	
+		if (letter == findWord[i] && word[i] != letter) {
+			word[i] = letter;
+			spans[i].innerHTML = word[i];
+			find = true;
 		}
 	}
+
 	if (find == true) {
 		finall.innerHTML = 'Угадано!';
 	} else if (find == false) {
@@ -107,14 +118,17 @@ function newGame() {
 	edit__block.disabled = true;
 	button.disabled = true;
 	finall.innerHTML = 'Браво, отгадано!';
+
 	const block = document.createElement('div');
 	block.classList.add('card__item');
 	card.append(block);
+
 	const replay = document.createElement('div');
 	replay.classList.add('button');
 	replay.innerHTML = 'Начать заново?';
 	block.append(replay);
 	hoverButton(replay);
+
 	replay.addEventListener('click', function() {
 		startProgram();
 		block.remove();
@@ -125,30 +139,18 @@ function newGame() {
 	console.clear();
 }
 
-function submitForm(event) {
-	event.preventDefault();
+function submitForm(e) {
+	e.preventDefault();
 	const letter = edit__block.value.toLowerCase();
 	logic(letter);
 	edit__block.value = '';
 }
 
-function editBlock(event) {
-	if (!event.target.value.match(/[а-яА-ЯЁё]+/)) {
-		event.target.value = '';
+function editBlock(e) {
+	if (!e.target.value.match(/[а-яА-ЯЁё]+/)) {
+		e.target.value = '';
 	}
-	if (event.target.value.length > 1) {
-		event.target.value = event.target.value[0];
+	if (e.target.value.length > 1) {
+		e.target.value = e.target.value[0];
 	}
 }
-
-form.addEventListener('submit', submitForm);
-edit__block.addEventListener('input', editBlock);
-
-edit__block.addEventListener('keydown', function(e) {
-	if ((e.key == 'я' || e.key == 'Я' || e.key == 'z' || e.key == 'Z') && e.ctrlKey) {
-		e.target.value = e.target.value.slice(0, -1);
-	}
-	if (e.key == 'Enter') {
-		submitForm(e);
-	}
-})

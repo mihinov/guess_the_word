@@ -41,7 +41,6 @@ form.addEventListener('submit', submitForm);
 edit__block.addEventListener('input', editBlock);
 
 edit__block.addEventListener('keydown', function(e) {
-	console.log(this);
 	if ((e.key == 'я' || e.key == 'Я' || e.key == 'z' || e.key == 'Z') && e.ctrlKey) {
 		e.target.value = e.target.value.slice(0, -1);
 	}
@@ -54,7 +53,6 @@ function startProgram() {
 	const numberInArray = getRandomInt(words.length);
 	findWord = words[numberInArray];
 	word = [];
-	console.log(findWord);
 	find__word.innerHTML = '';
 	for (let i = 0; i < findWord.length; i++) {
 		find__word.innerHTML += '<span>_</span>';
@@ -136,7 +134,6 @@ function newGame() {
 	});
 	button.style.backgroundColor = '#ebebe4';
 	button.style.cursor = 'default';
-	console.clear();
 }
 
 function submitForm(e) {
